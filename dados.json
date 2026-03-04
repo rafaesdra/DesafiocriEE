@@ -1,0 +1,104 @@
+{
+  "modulos": [
+    {
+      "tema": "Derivadas",
+      "conteudo": "A derivada representa a taxa de variação instantânea de uma função.",
+      "questao": {
+        "enunciado": "Se I(t) = 4t², qual é a taxa de variação no instante t = 3?",
+        "alternativas": ["12 A/s", "24 A/s", "36 A/s", "48 A/s"],
+        "correta": 1,
+        "explicacao": "Derivando: I'(t)=8t. Em t=3 → 8×3 = 24 A/s."
+      }
+    },
+    {
+      "tema": "Limites",
+      "conteudo": "O limite analisa o comportamento da função quando a variável se aproxima de um valor.",
+      "questao": {
+        "enunciado": "Qual é o limite de x² quando x → 2?",
+        "alternativas": ["2", "4", "8", "0"],
+        "correta": 1,
+        "explicacao": "Substituindo diretamente: 2² = 4."
+      }
+    },
+    {
+      "tema": "Integrais",
+      "conteudo": "A integral indefinida calcula a antiderivada da função.",
+      "questao": {
+        "enunciado": "∫ 2x dx = ?",
+        "alternativas": ["x² + C", "2x² + C", "x²/2 + C", "2 + C"],
+        "correta": 0,
+        "explicacao": "A integral de 2x é x² + C."
+      }
+    },
+    {
+      "tema": "Derivadas Trigonométricas",
+      "conteudo": "Funções trigonométricas possuem derivadas específicas.",
+      "questao": {
+        "enunciado": "Qual é a derivada de sen(x)?",
+        "alternativas": ["cos(x)", "-cos(x)", "-sen(x)", "tan(x)"],
+        "correta": 0,
+        "explicacao": "A derivada de sen(x) é cos(x)."
+      }
+    },
+    {
+      "tema": "Exponencial",
+      "conteudo": "A função exponencial natural possui a propriedade especial de que sua derivada é ela mesma.",
+      "questao": {
+        "enunciado": "Qual é a derivada de e^x?",
+        "alternativas": ["e^x", "x·e^x", "1", "ln(x)"],
+        "correta": 0,
+        "explicacao": "A derivada de e^x é e^x."
+      }
+    },
+    {
+      "tema": "Aplicação Física",
+      "conteudo": "Na Física, velocidade é a derivada da posição em relação ao tempo.",
+      "questao": {
+        "enunciado": "Se s(t)=5t³, qual é a velocidade v(t)?",
+        "alternativas": ["15t²", "5t²", "3t²", "10t"],
+        "correta": 0,
+        "explicacao": "Derivando 5t³ → 15t²."
+      }
+    },
+    {
+      "tema": "Logaritmo Natural",
+      "conteudo": "O logaritmo natural possui derivada específica.",
+      "questao": {
+        "enunciado": "Qual é a derivada de ln(x)?",
+        "alternativas": ["1/x", "x", "ln(x)", "e^x"],
+        "correta": 0,
+        "explicacao": "A derivada de ln(x) é 1/x."
+      }
+    },
+    {
+      "tema": "Integral Definida",
+      "conteudo": "A integral definida calcula a área sob a curva em um intervalo.",
+      "questao": {
+        "enunciado": "Qual é o valor de ∫₀¹ x dx?",
+        "alternativas": ["1", "1/2", "2", "0"],
+        "correta": 1,
+        "explicacao": "A integral de x é x²/2. Avaliando de 0 a 1 → 1/2."
+      }
+    },
+    {
+      "tema": "Regra do Produto",
+      "conteudo": "A regra do produto é dada por (uv)' = u'v + uv'.",
+      "questao": {
+        "enunciado": "Qual é a derivada de x·e^x?",
+        "alternativas": ["e^x", "x·e^x", "e^x + x·e^x", "x"],
+        "correta": 2,
+        "explicacao": "Aplicando a regra do produto → e^x + x·e^x."
+      }
+    },
+    {
+      "tema": "Regra da Potência",
+      "conteudo": "A regra geral da derivada é: d/dx (x^n) = n·x^(n-1).",
+      "questao": {
+        "enunciado": "Qual é a derivada de x⁵?",
+        "alternativas": ["5x⁴", "x⁴", "4x⁵", "5x"],
+        "correta": 0,
+        "explicacao": "Aplicando a regra → 5x⁴."
+      }
+    }
+  ]
+}

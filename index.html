@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plataforma de Reforço Acadêmico</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f9;margin:0;padding:20px;display:flex;justify-content:center}
+.container{max-width:900px;width:100%}
+.card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.08);margin-bottom:20px}
+h1,h2{text-align:center;margin-top:0}
+.logo{display:flex;justify-content:center;margin-bottom:15px}
+.logo img{max-width:150px}
+.option{background:#f1f5f9;padding:10px;border-radius:8px;margin:8px 0;cursor:pointer;transition:0.2s}
+.option:hover{background:#e2e8f0}
+.selected{border:2px solid #2563eb;background:#dbeafe}
+button{background:#2563eb;color:#fff;border:none;padding:10px;border-radius:8px;width:100%;margin-top:10px;cursor:pointer}
+button:hover{background:#1e40af}
+.feedback{margin-top:15px;font-weight:bold;text-align:center}
+.explicacao{margin-top:10px;font-size:14px;color:#444;text-align:center}
+.hidden{display:none}
+.tema-btn{background:#e2e8f0;margin:5px 0;padding:10px;border-radius:8px;cursor:pointer;text-align:center}
+.tema-btn:hover{background:#cbd5e1}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="card">
+<div class="logo">
+<img src="logo.png" alt="Logo">
+</div>
+<h1>⚡ Sistema de Reforço Acadêmico</h1>
+<p style="text-align:center">Escolha o assunto que deseja estudar</p>
+</div>
+
+<div class="card" id="menuCard">
+<h2>📚 Escolha um Tema</h2>
+<div id="listaTemas"></div>
+</div>
+
+<div class="card hidden" id="conteudoCard">
+<h2 id="tema"></h2>
+<p id="conteudo"></p>
+<button onclick="mostrarExercicio()">Ir para o Exercício</button>
+</div>
+
+<div class="card hidden" id="exercicioCard">
+<h2>📝 Exercício</h2>
+<p id="enunciado"></p>
+<div id="alternativas"></div>
+<button onclick="verificar()">Confirmar Resposta</button>
+<div class="feedback" id="feedback"></div>
+<div class="explicacao" id="explicacao"></div>
+<button onclick="voltarMenu()" style="background:#64748b;margin-top:15px;">Voltar ao Menu</button>
+</div>
+
+</div>
+
+<script>
+let dados;
+let moduloAtual = null;
+let respostaSelecionada = null;
+
+fetch("dados.json")
+.then(response => response.json())
+.then(data => {
+    dados = data;
+    carregarMenu();
+});
+
+function carregarMenu(){
+    const lista = document.getElementById("listaTemas");
+    lista.innerHTML = "";
+
+    dados.modulos.forEach((modulo, index) => {
+        const div = document.createElement("div");
+        div.className = "tema-btn";
+        div.innerText = modulo.tema;
+        div.onclick = () => selecionarTema(index);
+        lista.appendChild(div);
+    });
+}
+
+function selecionarTema(index){
+    moduloAtual = index;
+    const modulo = dados.modulos[index];
+
+    document.getElementById("menuCard").classList.add("hidden");
+    document.getElementById("conteudoCard").classList.remove("hidden");
+
+    document.getElementById("tema").innerText = "📘 " + modulo.tema;
+    document.getElementById("conteudo").innerText = modulo.conteudo;
+}
+
+function mostrarExercicio(){
+    const modulo = dados.modulos[moduloAtual];
+
+    document.getElementById("conteudoCard").classList.add("hidden");
+    document.getElementById("exercicioCard").classList.remove("hidden");
+
+    document.getElementById("enunciado").innerText = modulo.questao.enunciado;
+
+    const altDiv = document.getElementById("alternativas");
+    altDiv.innerHTML = "";
+
+    modulo.questao.alternativas.forEach((alt, index) => {
+        const div = document.createElement("div");
+        div.className = "option";
+        div.innerText = String.fromCharCode(65 + index) + ") " + alt;
+        div.onclick = () => selecionar(div, index);
+        altDiv.appendChild(div);
+    });
+
+    respostaSelecionada = null;
+    document.getElementById("feedback").innerText = "";
+    document.getElementById("explicacao").innerText = "";
+}
+
+function selecionar(elemento, index){
+    const opcoes = document.querySelectorAll('.option');
+    opcoes.forEach(op => op.classList.remove('selected'));
+    elemento.classList.add('selected');
+    respostaSelecionada = index;
+}
+
+function verificar(){
+    const modulo = dados.modulos[moduloAtual];
+    const correta = modulo.questao.correta;
+    const feedback = document.getElementById('feedback');
+    const explicacao = document.getElementById('explicacao');
+
+    if(respostaSelecionada === null){
+        feedback.style.color = 'orange';
+        feedback.innerText = 'Selecione uma alternativa.';
+        return;
+    }
+
+    if(respostaSelecionada === correta){
+        feedback.style.color = 'green';
+        feedback.innerText = 'Resposta Correta ✅';
+    } else {
+        feedback.style.color = 'red';
+        feedback.innerText = 'Resposta Incorreta ❌';
+    }
+
+    explicacao.innerText = modulo.questao.explicacao;
+}
+
+function voltarMenu(){
+    document.getElementById("exercicioCard").classList.add("hidden");
+    document.getElementById("conteudoCard").classList.add("hidden");
+    document.getElementById("menuCard").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
